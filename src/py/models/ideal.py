@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+##@package ideal
+# Functionality to perform IDEAL fat water separation
+#
+# Implemented according to S. B. Reeder et al., Multicoil Dixon Chemical Species Separation With an
+# Iterative Least-Squares Estimation Method, Magn Reson Med, 51:35-45, (2004)
+
 import numpy as np
 import numpy.ma as ma
 import sys;
@@ -10,6 +16,7 @@ import numpy.random as ra
 ## Model for IDEAL fat-water separation
 # Has functions to compute the system matrices A and B
 # as well as intermediate least squares result u
+# FIXXXME: remove echo time length hardcoded (matrix reshaping)
 class IDEAL:
     ## Constructor
     #@param data numpy array holding sample points of complex fat water signal
@@ -18,6 +25,7 @@ class IDEAL:
         self.te = te;
         self.omega = 0;
         self.data = data;
+        self.temp = 0;
         
         # fat offset frequency
         freq = 460;
