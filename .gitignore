@@ -1,2 +1,4 @@
 *.txt2
 build/
+doc/html
+doc/latex
