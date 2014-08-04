@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.petrobros.net"
+xmlns="http://www.petrobros.net"
+elementFormDefault="qualified">
+
+
+
+<xs:simpleType name="float_Type">
+    <xs:restriction base="xs:string">
+        <xs:pattern value="([0-9])*\.([0-9])+e(|\+|-)[0-9]+"/>
+        <xs:pattern value="([0-9])*\.([0-9])+"/>
+        <xs:pattern value="([0-9])+"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="sciInt_Type">
+    <xs:restriction base="xs:string">
+        <xs:pattern value="[0-9]*"/>
+        <xs:pattern value="[0-9]+e(|\+)[0-9]+"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="cs_float_Type">
+    <xs:restriction base="xs:string">
+        <!--xs:pattern value="([0-9])*\.([0-9])+e(|\+|-)[0-9]+"/-->
+        <xs:pattern value="([0-9])*\.([0-9])+(,( |\n)*([0-9])*\.([0-9])+)*"/>
+        <xs:pattern value="(([0-9])*\.([0-9])+|([0-9])+)((,( |\n)*([0-9])*\.([0-9])+|,( |\n)*([0-9])+))*"/>
+    </xs:restriction>
+</xs:simpleType>
+
+
+</xs:schema>

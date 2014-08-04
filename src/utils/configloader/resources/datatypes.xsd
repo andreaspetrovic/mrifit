@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.petrobros.net"
+xmlns="http://www.petrobros.net"
+elementFormDefault="qualified">
+
+<xs:annotation>
+  <xs:appinfo>MRI Fit configuration (Data Types)</xs:appinfo>
+  <xs:documentation xml:lang="en">
+  </xs:documentation>
+</xs:annotation>
+
+
+    <xs:complexType name="fileset_Type">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="filename">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="path" type="xs:string" use="required"/>
+        <xs:attribute name="filetype" type="xs:string" default="dicom"/>
+    </xs:complexType>
+
+    <xs:complexType name="dataset_Type">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="fileset" type="fileset_Type"/>
+        </xs:sequence>
+    </xs:complexType>    
+
+
+    <xs:complexType name="dataset_supportExternal_Type">
+        <xs:complexContent>
+            <xs:extension base="dataset_Type">
+                <xs:attribute name="isExternal" type="xs:boolean" default="false"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="mse_Type">
+         <xs:complexContent>
+            <xs:extension base="dataset_supportExternal_Type">
+                <xs:attribute name="nEchoes" type="xs:nonNegativeInteger" default="0"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="tir_Type">
+        <xs:complexContent>
+            <xs:extension base="dataset_supportExternal_Type">
+                <xs:attribute name="nInversionTimes" type="xs:nonNegativeInteger" default="0"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+
+
+</xs:schema>

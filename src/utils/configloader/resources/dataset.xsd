@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.petrobros.net"
+xmlns="http://www.petrobros.net"
+elementFormDefault="qualified">
+
+<xs:include schemaLocation="basictypes.xsd"/>
+<xs:include schemaLocation="datatypes.xsd"/>
+
+<xs:element name="dataset">
+    <xs:complexType>
+    <xs:complexContent>
+        <xs:extension base="dataset_Type">
+            <xs:attribute name="id" type="xs:string"/>
+        </xs:extension>
+    </xs:complexContent>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<dataset xmlns="http://www.petrobros.net">
+    <fileset path="meinPfad">
+        <filename>a.dcm</filename>
+        <filename>b.dcm</filename>
+        <filename>c.dcm</filename>
+        <filename>d.dcm</filename>
+    </fileset>
+</dataset>
+t
