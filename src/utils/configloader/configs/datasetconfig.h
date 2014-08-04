@@ -20,4 +20,27 @@ typedef vector<string> FileSetConfig;
  */
 typedef vector<FileSetConfig> DataSetConfig;
 
+
+class DataSetConfigObj
+{
+public:
+    DataSetConfigObj() :
+        dscfg_(DataSetConfig())
+    {}
+    virtual ~DataSetConfigObj() {}
+
+protected:
+    DataSetConfig dscfg_;
+    void dataSet(DataSetConfig dscfg)
+    {
+        dscfg_ = dscfg;
+    }
+
+    DataSetConfig dscfg()
+    {
+        return dscfg_;
+    }
+
+};
+
 #endif // DATASETCONFIG_H

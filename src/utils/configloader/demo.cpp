@@ -18,7 +18,7 @@ namespace py = boost::python;
 int main (int argc, const char* argv[])
 {
 
-    Q_INIT_RESOURCE(resources);
+    //Q_INIT_RESOURCE(resources);
     // ==============================================================
     /// \todo this is just a test, remove this
     QFile f(":/xsd/basictypes.xsd");
