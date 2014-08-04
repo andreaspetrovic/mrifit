@@ -34,7 +34,7 @@ configure_file (
 
 # Add resources
 add_subdirectory(./resources/)
-QT4_ADD_RESOURCES(ResourceSources resources/resources.qrc)
+#QT4_ADD_RESOURCES(ResourceSources resources/resources.qrc)
 
 # Add testdata
 add_subdirectory(./testdata/)
