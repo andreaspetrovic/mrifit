@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/xsl" href="../resources/test.xsl"?>
+
+<T2Fit xmlns="http://www.petrobros.net">
+    <T2FitGF>
+
+        <parameters>
+            <sliceprofile type="slice_abs" loc="slice_pf.txt">1.0, 2</sliceprofile>
+        </parameters>
+
+        <optimizer>
+            <lm>
+                <tolParam>123987.0e-2</tolParam>
+                <maxIter>123e+2</maxIter>
+                <tolGrad>666555</tolGrad>
+            </lm>
+        </optimizer>
+
+        <settings>
+            <thresholdMask/>
+            <thresholdFit/>
+        </settings>
+
+        <data>
+            <mse nEchoes="32"  isExternal="true">
+                <fileset path="" filetype="dicom">
+                    <filename>../testdata/dataset.xml</filename>
+                </fileset>
+            </mse>
+            <T1data>
+                <T1map>
+                    <fileset path="">
+                        <filename> </filename>
+                    </fileset>
+                </T1map>
+                <!--tir>
+                    <fileset path="">
+                        <filename> </filename>
+                    </fileset>
+                </tir-->
+                <!--T1value>1000</T1value-->
+            </T1data>
+            <FAdata>
+                <!--FAmap>
+                    <fileset path="" filetype="vtk">
+                        <filename> </filename>
+                    </fileset>
+                </FAmap-->
+                <!--FAvalue>1.02</FAvalue-->
+            </FAdata>
+        </data>
+
+        <output>
+        </output>
+
+    </T2FitGF>
+</T2Fit>

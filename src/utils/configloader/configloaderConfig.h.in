@@ -1,0 +1,45 @@
+#define VERSION_MAJOR @configloader_VERSION_MAJOR@
+#define VERSION_MINOR @configloader_VERSION_MINOR@
+#define VERSION_PATCH @configloader_VERSION_PATCH@
+
+
+/*!
+* \defgroup group_configloader
+* \{
+* \section sec_configloader Config-Loader Documentation
+* \subsection subsec_configloader_version Version Info
+* This is Config Loader Version @configloader_VERSION_MAJOR@.@configloader_VERSION_MINOR@.@configloader_VERSION_PATCH@
+*
+
+\subsection subsec_configloader_basic Basic Data Types for the configuration
+[t2fit.xsd]: @XSD_PATH@/t2fit.xsd
+[basictypes.xsd]: @XSD_PATH@/basictypes.xsd
+[datatypes.xsd]: @XSD_PATH@/datatypes.xsd
+
+The basic datatypes are defined in the following xsd schema documents:
+    - [basictypes.xsd][basictypes.xsd]
+    - [datatypes.xsd][datatypes.xsd]
+
+\subsection subsec_configloader_T2Config T2 Fit Configuration
+
+\subsubsection subsubsec_configloader_T2GF T2 GF Fit
+
+For the generating functions fit more data than for a simple fit has to be provided:
+    - An optimizer configuration (so far only levenberg marquardt)
+    - Some settings such as slice profile, etc.
+    - Data: At least a multi-echo spin-echo dataset
+    - Starting guess
+
+The relevant xsd is found here
+[t2fit.xsd][t2fit.xsd]
+
+The data element has to contain the multi spin echo fileset (most probably dicoms), a T1data element
+which contains either a turbo inversion recovery (TIR) fileset to compute a T1 Map, a precomputed
+T1 map, or a single T1 value (which is applied for all pixels). Finally it contains a FAdata element which
+consists of a FA map or a single FA value. If FAdata is empty, the FA is to be estimated from the
+fitting procedure.
+
+* \}
+*/
+
+

@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.petrobros.net"
+xmlns="http://www.petrobros.net"
+elementFormDefault="qualified">
+
+<xs:include schemaLocation="basictypes.xsd"/>
+<xs:include schemaLocation="datatypes.xsd"/>
+
+    <xs:complexType name="T2FitGF_parameters_Type">
+        <xs:all>
+            <xs:element name="sliceprofile" type="T2FitGF_sliceprofile_Type"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="T2FitGF_sliceprofile_Type">
+        <xs:simpleContent>
+           <xs:extension base="cs_float_Type">
+               <xs:attribute name="type" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="slice_abs"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="loc" default="">
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="threshold_Type">
+        <xs:simpleContent>
+            <xs:extension base="float_Type">
+                <xs:attribute name="computation">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="auto|fixed"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+<!-- ================================================================================ -->
+<!-- GENERAL SETTINGS -->
+
+    <xs:complexType name="T2FitGF_settings_Type">
+        <xs:all>
+            <xs:element name="thresholdMask" type="threshold_Type" default="100.0"/>
+            <xs:element name="thresholdFit" type="threshold_Type" default="10.0"/>
+        </xs:all>
+    </xs:complexType>
+
+
+<!-- ================================================================================ -->
+<!-- OPTIMIZER SETTINGS -->
+<!-- By now only the levenber-marquardt type (lm) is supported-->
+<xs:complexType name="T2FitGF_optimizer_Type">
+    <xs:all>
+        <xs:element name="lm" type="optimizer_lm_Type"/>
+    </xs:all>
+</xs:complexType>
+
+<!-- Levenberg marquardt optimizer -->
+<xs:complexType name="optimizer_lm_Type">
+    <xs:all>
+        <xs:element name="tolParam" type="float_Type"/>
+        <xs:element name="tolChiSquare" type="float_Type" minOccurs="0"/>
+        <xs:element name="tolGrad" type="float_Type" minOccurs="0"/>
+        <xs:element name="acceptLMstep" type="float_Type" minOccurs="0"/>
+        <xs:element name="dampingLambda" type="float_Type" minOccurs="0"/>
+        <xs:element name="incFactLambda" type="float_Type" minOccurs="0"/>
+        <xs:element name="decFactLambda" type="float_Type" minOccurs="0"/>
+        <xs:element name="maxIter" type="sciInt_Type"/>
+    </xs:all>
+</xs:complexType>
+<!-- ================================================================================ -->
+
+<!-- Data for the GF T2 Fit, so far only MSE data included, maybe T1 and T2 should come in here -->
+<!-- For T1, eg. TIR dataset, reference to a T1Fit configuration, or a precomputed T1 map -->
+<!-- For the flip angle, a precomputed FA map shall be supplied -->
+
+
+<xs:complexType name="T2FitGF_data_Type">
+    <xs:all>
+
+        <xs:element name="mse" type="mse_Type"/>
+
+        <xs:element name="T1data">
+            <xs:complexType>
+                <xs:choice minOccurs="1">
+                    <xs:element name="tir" type="tir_Type"/>
+                    <xs:element name="T1map" type="dataset_supportExternal_Type"/>
+                    <xs:element name="T1value" type="float_Type"/>
+                </xs:choice>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="FAdata">
+            <xs:complexType>
+                <xs:choice minOccurs="0">
+                    <xs:element name="FAmap" type="dataset_supportExternal_Type"/>
+                    <xs:element name="FAvalue" type="float_Type"/>
+                </xs:choice>
+            </xs:complexType>
+        </xs:element>
+
+    </xs:all>
+</xs:complexType>
+
+<!-- ================================================================================ -->
+
+    <xs:complexType name="T2FitGF_Type">
+        <xs:all>
+           <xs:element name="parameters" type="T2FitGF_parameters_Type"/>
+           <xs:element name="optimizer" type="T2FitGF_optimizer_Type"/>
+           <xs:element name="settings" type="T2FitGF_settings_Type" minOccurs="0"/>
+           <xs:element name="data" type="T2FitGF_data_Type"/>
+           <xs:element name="output"/>
+        </xs:all>
+    </xs:complexType>
+
+
+
+    <xs:element name="T2Fit">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="T2FitGF" type="T2FitGF_Type"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
